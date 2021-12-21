@@ -664,12 +664,13 @@ static void* addAperiodicFunc(ALLEGRO_THREAD* thr, void* arg) {
     bool done = false;
 
     for (float i = 0; i < LOOP_TILL; i += 1) {
-        int currentTime = i * WAIT_FACTOR;
+        
             if (i == 0) {
                 // wait before eyes are setup
                 al_rest(INITAL_WAIT);
             }
-            
+            al_lock_mutex(data->mutex);
+	    int currentTime = i * WAIT_FACTOR;
             ALLEGRO_EVENT_QUEUE* event_queue = NULL;
             //
             event_queue = al_create_event_queue();
@@ -704,6 +705,7 @@ static void* addAperiodicFunc(ALLEGRO_THREAD* thr, void* arg) {
                 }
                 }
             }
+	    al_unlock_mutex(data->mutex);
             al_rest(WAIT_FACTOR);
         }
     return NULL;
