@@ -517,6 +517,7 @@ static void* AperiodicTaskFunc(ALLEGRO_THREAD* thr, void* arg) {
                 && currentTime >= data->aperiodicTask[taskCount].a) {
                 temp++;
                 if (data->currentExc == data->ps) {
+			currentTime++;
                     // if first time excetuting then add to replenish list
                     if (data->aperiodicTask[taskCount].completed == 0) {
                         replenish.push_back(Replenish(data->aperiodicTask[taskCount].c, data->ts + currentTime));
@@ -525,6 +526,7 @@ static void* AperiodicTaskFunc(ALLEGRO_THREAD* thr, void* arg) {
                     data->aperiodicTask[taskCount].completed += WAIT_FACTOR;
                     data->aperiodicTask[taskCount].excecuting.push_back(CONTENT_START_X + i);
                     // cout << "Pushing " << i << "\n";
+			currentTime--;
                 }
                 else {
                     // request for exc if already not requested
