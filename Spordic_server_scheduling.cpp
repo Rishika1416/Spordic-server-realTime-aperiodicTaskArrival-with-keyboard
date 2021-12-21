@@ -682,7 +682,9 @@ static void* addAperiodicFunc(ALLEGRO_THREAD* thr, void* arg) {
                 case ALLEGRO_KEY_UP: {
 					//cout<<"hello Rishika"<<endl;
                     AperiodicTask aperiodicTask1 = AperiodicTask(2,currentTime);
+			al_lock_mutex(data->mutex);
                     data->aperiodicTask.push_back(aperiodicTask1);
+			al_unlock_mutex(data->mutex);
 					 //if (currentTime == (int)data->aperiodicTask[taskCount].a) {
                     // push to queue
                     // new instace arrived
@@ -699,7 +701,10 @@ static void* addAperiodicFunc(ALLEGRO_THREAD* thr, void* arg) {
                 }
                 case ALLEGRO_KEY_DOWN: {
                     AperiodicTask aperiodicTask2 = AperiodicTask(4,currentTime);
+			al_lock_mutex(data->mutex);
                     data->aperiodicTask.push_back(aperiodicTask2);
+			al_unlock_mutex(data->mutex);
+		    
 		    cout << "Aperiodic Task" << ": new instance arrived c:"<< ", arrived at:" << currentTime << "\n"; //", absolute deadline:" << threadData.d + currentTime << "\n"; 
                     data->sVerLines
                         .push_back(CONTENT_START_X + i);
