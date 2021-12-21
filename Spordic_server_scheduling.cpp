@@ -681,7 +681,7 @@ static void* addAperiodicFunc(ALLEGRO_THREAD* thr, void* arg) {
                 switch (ev.keyboard.keycode) {
                 case ALLEGRO_KEY_UP: {
 					//cout<<"hello Rishika"<<endl;
-                    AperiodicTask aperiodicTask1 = AperiodicTask(4,currentTime);
+                    AperiodicTask aperiodicTask1 = AperiodicTask(2,currentTime);
                     data->aperiodicTask.push_back(aperiodicTask1);
 					 //if (currentTime == (int)data->aperiodicTask[taskCount].a) {
                     // push to queue
@@ -698,9 +698,15 @@ static void* addAperiodicFunc(ALLEGRO_THREAD* thr, void* arg) {
                     break;
                 }
                 case ALLEGRO_KEY_DOWN: {
-                    AperiodicTask aperiodicTask2 = AperiodicTask(2,currentTime);
+                    AperiodicTask aperiodicTask2 = AperiodicTask(4,currentTime);
                     data->aperiodicTask.push_back(aperiodicTask2);
-                    break;
+		    cout << "Aperiodic Task" << ": new instance arrived c:"<< ", arrived at:" << currentTime << "\n"; //", absolute deadline:" << threadData.d + currentTime << "\n"; 
+                    data->sVerLines
+                        .push_back(CONTENT_START_X + i);
+
+                    // mark want CPU true
+                    data->serverWantCPU = true;
+			break;
                 }
                 }
             }
