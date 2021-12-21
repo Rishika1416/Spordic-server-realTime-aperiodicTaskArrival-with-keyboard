@@ -664,7 +664,7 @@ static void* addAperiodicFunc(ALLEGRO_THREAD* thr, void* arg) {
     bool done = false;
 
     for (float i = 0; i < LOOP_TILL; i += 1) {
-        int currentTime = i * WAIT_FACTOR;
+        
             if (i == 0) {
                 // wait before eyes are setup
                 al_rest(INITAL_WAIT);
@@ -677,7 +677,9 @@ static void* addAperiodicFunc(ALLEGRO_THREAD* thr, void* arg) {
             al_register_event_source(event_queue, al_get_keyboard_event_source());
             ALLEGRO_EVENT ev;
             al_wait_for_event(event_queue, &ev);
+	    
             if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
+		int currentTime = (data->currentTime-CONTENT_START_X) * WAIT_FACTOR;
                 switch (ev.keyboard.keycode) {
                 case ALLEGRO_KEY_UP: {
 					//cout<<"hello Rishika"<<endl;
